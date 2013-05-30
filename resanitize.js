@@ -31,6 +31,12 @@ function resanitize (str) {
       throw new TypeError('Invalid argument: must be String or Buffer');
     }
   }
+
+  // Check if html malformed
+  if (!htmlValidityCheck(str)) {
+    return str;
+  }
+
   str = stripAsciiCtrlChars(str);
   str = stripExtendedCtrlChars(str);
   str = fixSpace(str);
@@ -261,3 +267,17 @@ function stripHtml (str) {
   return str.replace(/<.*?>/g, '');
 }
 module.exports.stripHtml = stripHtml;
+
+
+/**
+ *  Quick html tag check to see if there is equivalent ones to close off tag
+ */
+function htmlValidityCheck(str) {
+
+  // Match tags start and end crudely
+  if (str.match(/<[a-z!\-]*/gi) == str.match(/>/gi)) {
+    return true;
+  }
+
+  return false;
+}
