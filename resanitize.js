@@ -37,6 +37,9 @@ function resanitize (str) {
     return str;
   }
 
+  str = stripIframe(str); // Added by herby
+  str = stripScript(str); // Added by herby
+  str = stripStyle(str);  // Added by herby
   str = stripAsciiCtrlChars(str);
   str = stripExtendedCtrlChars(str);
   str = fixSpace(str);
@@ -267,6 +270,33 @@ function stripHtml (str) {
   return str.replace(/<.*?>/g, '');
 }
 module.exports.stripHtml = stripHtml;
+
+/**
+ * Dumbly strip all iFrames
+ */
+function stripIframe (str) {
+  // Delete all iframes
+  return str.replace(/<iframe[^>]*?>[\s\S]*?<\/iframe>/gi, '');
+}
+module.exports.stripIframe = stripIframe;
+
+/**
+ * Dumbly strip all script
+ */
+function stripScript (str) {
+  // Delete all iframes
+  return str.replace(/<script[^>]*?>[\s\S]*?<\/script>/gi, '');
+}
+module.exports.stripIframe = stripIframe;
+
+/**
+ * Dumbly strip all css
+ */
+function stripStyle (str) {
+  // Delete all iframes
+  return str.replace(/<style[^>]*?>[\s\S]*?<\/style>/gi, '');
+}
+module.exports.stripIframe = stripIframe;
 
 
 /**
