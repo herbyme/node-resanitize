@@ -37,9 +37,9 @@ function resanitize (str) {
     return str;
   }
 
-  str = stripIframe(str); // Added by herby
-  str = stripScript(str); // Added by herby
-  str = stripStyle(str);  // Added by herby
+  //str = stripIframe(str); // Added by herby
+  //str = stripScript(str); // Added by herby
+  //str = stripStyle(str);  // Added by herby
   str = stripAsciiCtrlChars(str);
   str = stripExtendedCtrlChars(str);
   str = fixSpace(str);
